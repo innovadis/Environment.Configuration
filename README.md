@@ -46,7 +46,7 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        var myConfig = Configuration.GetEnvironmentSection<MyConfiguration>();
+        var myConfig = Configuration.GetEnvironmentSection<MyConfiguration>() as MyConfiguration;
 
         services.AddDbContext<SqlDatabaseContext>(options => 
         {
@@ -57,3 +57,6 @@ public class Startup
     }
 }
 ```
+
+## Error handling
+When a property is marked as required by `IsRequired = true` in the `ConfigurationProperty` but could not be loaded from the environment or results empty, a `ConfigurationErrorsException` is thrown telling you which variable is missing.
