@@ -46,7 +46,7 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        var myConfig = Configuration.GetEnvironmentSection<MyConfiguration>() as MyConfiguration;
+        var myConfig = Configuration.GetEnvironmentSection<MyConfiguration>();
 
         services.AddDbContext<SqlDatabaseContext>(options => 
         {

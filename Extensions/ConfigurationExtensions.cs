@@ -15,7 +15,7 @@ namespace Environment.Configuration.Extensions
         /// <typeparam name="TSection"></typeparam>
         /// <returns></returns>
         /// <exception cref="ConfigurationErrorsException"></exception>
-        public static IConfigurationSection GetEnvironmentSection<TSection>(this IConfiguration configuration)
+        public static TSection GetEnvironmentSection<TSection>(this IConfiguration configuration)
             where TSection : class, IConfigurationSection
         {
             // Get the type of generic TSection which is an implementation of IConfigurationSection
@@ -25,7 +25,7 @@ namespace Environment.Configuration.Extensions
             var properties = type.GetProperties();
             
             // Create a new instance of our generic and insert the configuration as a parameter
-            var configurationSection = (TSection) Activator.CreateInstance(typeof(TSection), configuration);
+            var configurationSection = (TSection) Activator.CreateInstance(type, configuration);
 
             foreach (var property in properties)
             {
